@@ -3,13 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { Provider } from 'react-redux';
+import store from '../redux/store'
 
 import ManageExpense from '../screens/ManageExpense';
 import RecentExpenses from '../screens/RecentExpenses';
 import AllExpenses from '../screens/AllExpenses';
 import { GlobalStyles } from '../constants/styles';
 import IconButton from '../components/UI/IconButton';
-import ExpensesContextProvider from '../store/expenses-context';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -64,7 +65,7 @@ export default function Page() {
   return (
     <>
       <StatusBar style="light" />
-      <ExpensesContextProvider>
+      <Provider store={store}>
         <NavigationContainer independent={true}>
           <Stack.Navigator
             screenOptions={{
@@ -86,7 +87,7 @@ export default function Page() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </ExpensesContextProvider>
+      </Provider>
     </>
   );
 }
